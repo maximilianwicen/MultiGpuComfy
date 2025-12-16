@@ -10,7 +10,6 @@ You've got 2 GPUs. You want 2 ComfyUI instances. But that 20GB model? It loads t
 
 This launcher loads your big models **once** into shared memory, then spawns multiple ComfyUI workers that all read from the same place. 
 
-Think of it like a library - one copy of the book, multiple people reading it.
 
 ## Quick Start
 
