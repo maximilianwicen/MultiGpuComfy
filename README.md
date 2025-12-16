@@ -72,6 +72,8 @@ python multi_gpu_launcher_v4.py --gpus 0,1 --unet /path/to/model -- --lowvram
 
 **Workers crash on startup** - Check that model paths are correct and accessible.
 
+**Errors with amount of file pointers in memory - just ask gemini or chatgippity there's a simple command that solves this.
+
 **Different RAM than expected** - Use `smem -p -k | grep python` for accurate shared memory stats. Regular `top` lies about shared memory.
 
 ---
