@@ -54,8 +54,8 @@ This gives you:
 
 | Setup | RAM Usage |
 |-------|-----------|
-| 2x ComfyUI (normal) | ~60GB 😰 |
-| 2x ComfyUI (shared) | ~32GB 😎 |
+| 4x ComfyUI (normal) | ~120GB 😰 |
+| 4x ComfyUI (shared) | ~32GB 😎 |
 
 ## How It Works (the short version)
 
