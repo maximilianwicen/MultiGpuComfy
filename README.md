@@ -1,4 +1,4 @@
-# 🚀 Multi-GPU ComfyUI Launcher
+# Multi-GPU ComfyUI Launcher
 
 **Run multiple ComfyUI instances without melting your RAM**
 
@@ -77,4 +77,4 @@ python multi_gpu_launcher_v4.py --gpus 0,1 --unet /path/to/model -- --lowvram
 
 ---
 
-*Made with 🧠 and too many failed attempts at fork() + CUDA*
+*Made with a lot of pain and too many failed attempts at fork() + CUDA*
