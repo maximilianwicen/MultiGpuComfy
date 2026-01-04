@@ -8,15 +8,11 @@ This version:
 3. When a model is needed, it reloads from shared memory instead of private copies
 
 Usage:
-python multi_gpu_launcher_v4.py \
-    --gpus 0,1 \
-    --listen 0.0.0.0 \
-    --unet /path/to/unet.safetensors \
-    --clip /path/to/clip.safetensors \
-    --vae /path/to/vae.safetensors \
-    --weight-dtype fp8_e4m3fn
+    python multi_gpu_launcher_v4.py --gpus 0,1 --models-dir /path/to/models --listen 0.0.0.0
     
-    """
+Or specify individual models:
+    python multi_gpu_launcher_v4.py --gpus 0,1 --unet /path/to/unet.safetensors --listen 0.0.0.0
+"""
 
 import os
 import sys
@@ -224,9 +220,14 @@ def worker_process(gpu_id: int, port: int, listen: str,
         
         if shared_tensors is not None:
             logger.info(f"✓ USING SHARED MEMORY: {path}")
+            # IMPORTANT: ComfyUI mutates the returned state_dict during model loading
+            # (notably popping keys in BaseModel.load_model_weights). If we return the
+            # registry's dict directly, the first load will empty it and subsequent
+            # loads will fail model detection. Return a fresh dict wrapper each time.
+            shared_state_dict = dict(shared_tensors)
             if kwargs.get('return_metadata', False):
-                return shared_tensors, metadata
-            return shared_tensors
+                return shared_state_dict, metadata
+            return shared_state_dict
         
         logger.info(f"✗ Loading from disk (not shared): {path}")
         return original_load_torch_file(path, **kwargs)
